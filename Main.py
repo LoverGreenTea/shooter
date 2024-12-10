@@ -41,7 +41,7 @@ class Player:
         if keys[pygame.K_SPACE]:
             self.bullets.append(Bullet('bullet.png',
                                        40, 40,
-                                       self.hitbox.x, self.hitbox.y,
+                                       self.hitbox.x +30, self.hitbox.y,
                                        10))
 
         for bullet in self.bullets:
@@ -95,10 +95,9 @@ while True:
             pygame.quit()
 
     weapon.move()
-    weapon.draw(window)
     player.draw(window)
     player.move()
-
+    weapon.draw(window)
     pygame.display.flip()
     window.blit(background, [0, 0])
     fps.tick(60)
