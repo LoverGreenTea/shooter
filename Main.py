@@ -3,6 +3,7 @@ import time
 import mixer
 import random
 
+
 pygame.mixer.init()
 pygame.init()
 window = pygame.display.set_mode((700, 500))
@@ -58,6 +59,8 @@ class UFO:
     def draw(self, window):
         window.blit(self.texture, self.hitbox)
 
+    def move(self):
+            self.hitbox.y += self.speed
 class Bullet:
     def __init__(self, img, width, height, x, y, speed):
         pass
@@ -81,11 +84,14 @@ background = pygame.image.load('galaxy.jpg')
 background = pygame.transform.scale(background, [700, 500])
 game = True
 
-listenemy = [
-    UFO(3, 300, 20, 90, 50, "ufo.png"),
-    UFO(3, 600, 70, 90, 50, "ufo.png"),
-    UFO(3, 100, 40, 90, 50, "ufo.png")
-]
+listenemy = []
+y = 200
+for i in range(4):
+    listenemy.append(UFO(0.650, random.randint(0, 650), 5, 90, 50, "ufo.png"))
+    y -= 100
+
+
+score = 0
 
 weapon = Bullet('bullet.png', 50, 60, 1000,10, 10)
 player = Player(3, 300, 350, 100, 150, "rocket.png")
@@ -94,6 +100,23 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
 
+    for e in listenemy:
+        e.move()
+        if e.hitbox.y > 500:
+            e.hitbox.y = -100
+            e.hitbox.x = random.randint(0, 650)
+
+    for e in listenemy:
+        for b in player.bullets:
+            if e.hitbox.colliderect(b.hitbox):
+                b.hitbox.x = 5000
+                player.bullets.remove(b)
+                e.hitbox.y = -100
+                e.hitbox.x = random.randint(0, 650)
+                score += 1
+                break
+
+    score_lbl = pygame.font.Font(None, 23).render("Score: " + str(score), True, [255, 255, 255])
     weapon.move()
     player.draw(window)
     player.move()
@@ -101,6 +124,6 @@ while True:
     pygame.display.flip()
     window.blit(background, [0, 0])
     fps.tick(60)
-
+    window.blit(score_lbl, [0,0])
     for ufo in listenemy:
         ufo.draw(window)
