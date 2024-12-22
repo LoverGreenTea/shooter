@@ -1,6 +1,6 @@
 import json
 
-def save(data):
+def save_file(data):
     try:
         with open('file_Save.json', 'r', encoding='utf-8') as file:
             data = json.load(file)

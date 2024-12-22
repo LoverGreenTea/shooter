@@ -93,8 +93,8 @@ def game():
         y -= 100
 
 
-    score = 0
-
+    score = data["score"]
+    write_in_file
     weapon = Bullet('bullet.png', 50, 60, 1000,10, 10)
     player = Player(3, 300, 350, 100, 150, "rocket.png")
 
