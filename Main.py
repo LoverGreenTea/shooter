@@ -5,7 +5,7 @@ import random
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 
-from File_Save import write_in_file
+from File_Save import write_in_file, save_file, read_file
 
 
 def game():
@@ -95,7 +95,7 @@ def game():
         listenemy.append(UFO(0.650, random.randint(0, 650), 5, 90, 50, "ufo.png"))
         y -= 100
 
-
+    data = read_file()
     score = data["score"]
     write_in_file(data)
     weapon = Bullet('bullet.png', 50, 60, 1000,10, 10)
