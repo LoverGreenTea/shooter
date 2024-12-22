@@ -103,7 +103,7 @@ def game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-
+                return
         for e in listenemy:
             e.move()
             if e.hitbox.y > 500:
