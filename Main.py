@@ -5,6 +5,9 @@ import random
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 
+from File_Save import write_in_file
+
+
 def game():
     pygame.mixer.init()
     pygame.init()
@@ -94,7 +97,7 @@ def game():
 
 
     score = data["score"]
-    write_in_file
+    write_in_file(data)
     weapon = Bullet('bullet.png', 50, 60, 1000,10, 10)
     player = Player(3, 300, 350, 100, 150, "rocket.png")
 
