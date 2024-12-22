@@ -11,7 +11,7 @@ fps = pygame.time.Clock()
 
 background = pygame.transform.scale(pygame.image.load("galaxy.jpg"), [700, 500])
 pygame.mixer.music.load('space.ogg')
-#pygame.mixer.music.play(-1)
+pygame.mixer.music.play(-1)
 
 kick_sound = pygame.mixer.Sound('fire.ogg')
 
@@ -110,6 +110,7 @@ while True:
         for b in player.bullets:
             if e.hitbox.colliderect(b.hitbox):
                 b.hitbox.x = 5000
+                player.bullets.remove(b)
                 player.bullets.remove(b)
                 e.hitbox.y = -100
                 e.hitbox.x = random.randint(0, 650)
